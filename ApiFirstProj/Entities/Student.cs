@@ -9,6 +9,6 @@ namespace ApiFirstProj.Entities
         public string Name { get; set; }
         public string Course { get; set; }
         public string Year { get; set; }
-        public ICollection<Subject> Subjects { get; set; }
+        public ICollection<StudentSubject> StudentSubjects { get; set; }
     }
 }

@@ -14,9 +14,18 @@ namespace ApiFirstProj.AppDbContext
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Student>()
-                .HasMany(s => s.Subjects)
-                .WithMany(s => s.Students);
+            modelBuilder.Entity<StudentSubject>()
+                .HasKey(compKey => new { compKey.StudentId, compKey.SubjectId });
+
+            modelBuilder.Entity<StudentSubject>()
+                .HasOne(s => s.Student)
+                .WithMany(s => s.StudentSubjects)
+                .HasForeignKey(s => s.StudentId);
+
+            modelBuilder.Entity<StudentSubject>()
+                .HasOne(s => s.Subject)
+                .WithMany(s => s.StudentSubjects)
+                .HasForeignKey(s => s.SubjectId);
 
             modelBuilder.Entity<Subject>()
                 .HasOne(p => p.Professor)
