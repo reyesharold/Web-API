@@ -61,9 +61,19 @@ namespace ApiFirstProj.Services
             return response.ToStudentResponse();
         }
 
-        public Task<StudentResponse> UpdateStudentViaIdAsync(Guid id)
+        public async Task<StudentResponse> UpdateStudentViaIdAsync(Guid id, StudentUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var student = await _commonRepo.GetAsync(s => s.Id == id, query => query
+            .Include(s => s.StudentSubjects)
+                .ThenInclude(s => s.Subject));
+            if (student == null) { return null;}
+
+            student.Name = request.Name;
+            student.Year = request.Year;
+
+            var response = await _commonRepo.UpdateAsync(student, n => n.Name, y => y.Year);
+
+            return response.ToStudentResponse();
         }
     }
 }

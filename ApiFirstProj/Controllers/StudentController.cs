@@ -1,4 +1,6 @@
-﻿using ApiFirstProj.DTO;
+﻿using ApiFirstProj.AppDbContext;
+using ApiFirstProj.Common;
+using ApiFirstProj.DTO;
 using ApiFirstProj.Entities;
 using ApiFirstProj.Services;
 using Microsoft.AspNetCore.Http;
@@ -12,7 +14,6 @@ namespace ApiFirstProj.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentServices _studentServices;
-
         public StudentController(IStudentServices studentServices)
         {
             _studentServices = studentServices;
@@ -29,9 +30,9 @@ namespace ApiFirstProj.Controllers
         public async Task<ActionResult<StudentResponse>> GetStudent(Guid id)
         {
             var response = await _studentServices.GetStudentViaIdAsync(id);
-            if (response == null) { NotFound(); }
+            if (response == null) { return NotFound(); }
 
-            return response;
+            return Ok(response);
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<StudentResponse>>> GetStudents()
@@ -50,6 +51,14 @@ namespace ApiFirstProj.Controllers
             if (!response) { return UnprocessableEntity(); }
 
             return NoContent();
+        }
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<StudentResponse>> UpdateStudentDetails(Guid id,StudentUpdateRequest request)
+        {
+            var response = await _studentServices.UpdateStudentViaIdAsync(id,request);
+            if (response == null) { return NotFound(); }
+
+            return Ok(response);
         }
     }
 }
