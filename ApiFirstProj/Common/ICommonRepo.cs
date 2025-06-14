@@ -9,5 +9,6 @@ namespace ApiFirstProj.Common
         Task<T> CreateAsync(T entity);
         Task<T> UpdateAsync(T entity, params Expression<Func<T, object>>[] updateProperties);
         Task<bool> DeleteViaIdAsync(Guid id);
+        Task<bool> DeleteViaCompKeyAsync(Expression<Func<T, bool>> condition);
     }
 }

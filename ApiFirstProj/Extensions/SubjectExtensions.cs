@@ -12,7 +12,7 @@ namespace ApiFirstProj.Extensions
                 Id = subject.Id,
                 Name = subject.Name,
                 Description = subject.Description,
-                Professor = subject.Professor.ToProfessorResponse(),
+                ProfessorName = subject.Professor.Name,
                 Students = subject.StudentSubjects.Select(s => s.ToStudentSubjectResponse()).ToList(),
             };
         }

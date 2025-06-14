@@ -76,5 +76,15 @@ namespace ApiFirstProj.Common
 
             return await _context.SaveChangesAsync() > 0; //SaveChangesAsync returns an integer if rows were affected
         }
+
+        public async Task<bool> DeleteViaCompKeyAsync(Expression<Func<T,bool>> condition)
+        {
+            var item = await _db.FirstOrDefaultAsync(condition);
+            if (item == null) { return false; }
+
+            _db.Remove(item);
+
+            return await _context.SaveChangesAsync() > 0; //SaveChangesAsync returns an integer if rows were affected
+        }
     }
 }

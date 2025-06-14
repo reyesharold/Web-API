@@ -21,6 +21,9 @@ builder.Services.AddScoped<ICommonRepo<Subject>, CommonRepo<Subject>>();
 builder.Services.AddScoped<ICommonRepo<StudentSubject>, CommonRepo<StudentSubject>>();
 
 builder.Services.AddScoped<IStudentServices, StudentServices>();
+builder.Services.AddScoped<IProfessorServices, ProfessorServices>();
+builder.Services.AddScoped<ISubjectServices, SubjectServices>();
+builder.Services.AddScoped<IStudentSubjectServices, StudentSubjectServices>();
 
 var app = builder.Build();
 
