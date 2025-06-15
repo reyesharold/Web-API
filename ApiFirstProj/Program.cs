@@ -25,11 +25,21 @@ builder.Services.AddScoped<IProfessorServices, ProfessorServices>();
 builder.Services.AddScoped<ISubjectServices, SubjectServices>();
 builder.Services.AddScoped<IStudentSubjectServices, StudentSubjectServices>();
 
+// Swagger
+builder.Services.AddEndpointsApiExplorer(); // finds all the API routes for documentation
+builder.Services.AddSwaggerGen( options =>
+{
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory , "api.xml")); // includes comments in the Swagger doc
+}); // generate documentation for API
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
+
+app.UseSwagger(); // creates the JSON manual 
+app.UseSwaggerUI(); // creates the web page for Swagger
 
 app.UseAuthorization();
 

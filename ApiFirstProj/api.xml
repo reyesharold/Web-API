@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiFirstProj</name>
+    </assembly>
+    <members>
+        <member name="M:ApiFirstProj.Controllers.ProfessorController.CreateProfessor(ApiFirstProj.DTO.ProfessorAddRequest)">
+            <summary>
+            Creates a Professor and input it in the database.
+            </summary>
+            <param name="professor">Professor DTO add request. This includes the name of professor.</param>
+            <returns>Professor DTO response. This includes ID, Name and subjects assigned to the professor.</returns>
+        </member>
+        <member name="T:ApiFirstProj.Migrations.Initial">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiFirstProj.Migrations.Initial.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiFirstProj.Migrations.Initial.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiFirstProj.Migrations.Initial.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ApiFirstProj.Migrations.UpdateManyToManyRelationship">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiFirstProj.Migrations.UpdateManyToManyRelationship.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiFirstProj.Migrations.UpdateManyToManyRelationship.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiFirstProj.Migrations.UpdateManyToManyRelationship.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ApiFirstProj.Migrations.updateEntities">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiFirstProj.Migrations.updateEntities.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiFirstProj.Migrations.updateEntities.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiFirstProj.Migrations.updateEntities.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
