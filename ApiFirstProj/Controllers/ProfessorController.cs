@@ -17,6 +17,11 @@ namespace ApiFirstProj.Controllers
             _professorServices = professorServices;
         }
 
+        /// <summary>
+        /// Creates a Professor and input it in the database.
+        /// </summary>
+        /// <param name="professor">Professor DTO add request. This includes the name of professor.</param>
+        /// <returns>Professor DTO response. This includes ID, Name and subjects assigned to the professor.</returns>
         [HttpPost]
         public async Task<ActionResult<ProfessorResponse>> CreateProfessor(ProfessorAddRequest professor)
         {
