@@ -3,14 +3,16 @@ using ApiFirstProj.Common;
 using ApiFirstProj.DTO;
 using ApiFirstProj.Entities;
 using ApiFirstProj.Services;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiFirstProj.Controllers
+namespace ApiFirstProj.Controllers.v1
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class StudentController : ControllerBase
     {
         private readonly IStudentServices _studentServices;

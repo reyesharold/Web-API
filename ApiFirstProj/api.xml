@@ -4,7 +4,7 @@
         <name>ApiFirstProj</name>
     </assembly>
     <members>
-        <member name="M:ApiFirstProj.Controllers.ProfessorController.CreateProfessor(ApiFirstProj.DTO.ProfessorAddRequest)">
+        <member name="M:ApiFirstProj.Controllers.v1.ProfessorController.CreateProfessor(ApiFirstProj.DTO.ProfessorAddRequest)">
             <summary>
             Creates a Professor and input it in the database.
             </summary>

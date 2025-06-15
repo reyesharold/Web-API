@@ -4,7 +4,7 @@ using ApiFirstProj.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiFirstProj.Controllers
+namespace ApiFirstProj.Controllers.v1
 {
     [Route("api/[controller]")]
     [ApiController]
