@@ -21,14 +21,7 @@ namespace ApiFirstProj.Services
 
             var response = await _commonRepo.CreateAsync(student.ToStudent());
 
-            return new StudentResponse
-            {
-                Id = response.Id,
-                Name = response.Name,
-                Course = response.Course,
-                Year = response.Year
-            };
-
+            return response.ToStudentResponse();
         }
 
         public async Task<bool> DeleteStudentViaIdAsync(Guid id)

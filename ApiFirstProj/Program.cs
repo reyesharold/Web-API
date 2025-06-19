@@ -9,6 +9,8 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using ApiFirstProj.Swagger;
 using Asp.Versioning.ApiExplorer;
+using System.Reflection;
+using ApiFirstProj.Core;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,10 +47,11 @@ builder.Services.AddApiVersioning(config =>
 
 
 // DbContext
-builder.Services.AddDbContext<ApplicationDbContext>( options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
 
 builder.Services.AddScoped<ICommonRepo<Student>, CommonRepo<Student>>();
 builder.Services.AddScoped<ICommonRepo<Professor>, CommonRepo<Professor>>();
@@ -60,14 +63,23 @@ builder.Services.AddScoped<IProfessorServices, ProfessorServices>();
 builder.Services.AddScoped<ISubjectServices, SubjectServices>();
 builder.Services.AddScoped<IStudentSubjectServices, StudentSubjectServices>();
 
+// Mediator
+builder.Services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+});
+
+// Automapper
+builder.Services.AddAutoMapper(typeof(StudentMappingProfile));
+
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer(); // finds all the API routes for documentation
 
-       // generate documentation for API
-builder.Services.AddSwaggerGen( options =>
+// generate documentation for API
+builder.Services.AddSwaggerGen(options =>
 {
-    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory , "api.xml")); // includes comments in the Swagger doc
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "api.xml")); // includes comments in the Swagger doc
 
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo() { Title = "School Web API", Version = "1.0" });
 
@@ -75,9 +87,17 @@ builder.Services.AddSwaggerGen( options =>
 
 });
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseCors(x =>
+{
+    x.AllowAnyHeader()
+    .AllowAnyMethod()
+    .WithOrigins("http://localhost:3000", "https://localhost:3000");
+});
 
 //var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
@@ -90,7 +110,7 @@ app.UseSwaggerUI(options =>
 {
     //var descriptions = app.DescribeApiVersions();
 
-    //foreach(var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
+    //foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
     //{
     //    var url = $"/swagger/{description.GroupName}/swagger.json";
     //    var name = description.GroupName.ToUpperInvariant();
@@ -99,7 +119,7 @@ app.UseSwaggerUI(options =>
 
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "1.0");
     options.SwaggerEndpoint("/swagger/v2/swagger.json", "2.0");
-}); 
+});
 
 app.UseAuthorization();
 
