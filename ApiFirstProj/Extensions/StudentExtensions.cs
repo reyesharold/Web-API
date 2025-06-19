@@ -13,7 +13,9 @@ namespace ApiFirstProj.Extensions
                 Name = student.Name,
                 Course = student.Course,
                 Year = student.Year,
-                Subjects = student.StudentSubjects.Select(s => s.ToStudentSubjectResponse()).ToList(),
+                Subjects = student.StudentSubjects != null ?
+                student.StudentSubjects.Select(s => s.ToStudentSubjectResponse()).ToList() 
+                : new List<StudentSubjectResponse>(),
             };
         }
     }

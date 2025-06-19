@@ -11,7 +11,7 @@ namespace ApiFirstProj.Extensions
             {
                 Id = professor.Id,
                 Name = professor.Name,
-                Subjects = professor.Subjects.Select(s => s.ToSubjectRespose()).ToList(),
+                Subjects = professor.Subjects != null ? professor.Subjects.Select(s => s.ToSubjectRespose()).ToList() : new List<SubjectResponse>(),
             };
         }
     }
