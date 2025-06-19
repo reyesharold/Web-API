@@ -16,7 +16,7 @@ namespace ApiFirstProj.Common
 
         }
 
-        public async Task<ICollection<T>> GetAllAsync(Expression<Func<T,bool>> condition = null,Func<IQueryable<T>,IQueryable<T>> query = null)
+        public async Task<ICollection<T>> GetAllAsync(Expression<Func<T,bool>> condition = null,Func<IQueryable<T>,IQueryable<T>> query = null, CancellationToken cancellationToken = default)
         {
             IQueryable<T> db = _db;
 
@@ -29,7 +29,7 @@ namespace ApiFirstProj.Common
                 db = db.Where(condition);
             }
 
-            var response = await db.ToListAsync();
+            var response = await db.ToListAsync(cancellationToken);
 
             return response;
         }

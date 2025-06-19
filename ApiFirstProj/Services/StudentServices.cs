@@ -35,11 +35,12 @@ namespace ApiFirstProj.Services
             return response;
         }
 
-        public async Task<ICollection<StudentResponse>> GetAllStudents()
+        public async Task<ICollection<StudentResponse>> GetAllStudents(CancellationToken cancellationToken)
         {
             var response = await _commonRepo.GetAllAsync(null, query => query
             .Include(s => s.StudentSubjects)
-                .ThenInclude(s => s.Subject)
+                .ThenInclude(s => s.Subject),
+                cancellationToken
             );
 
             return response.Select(temp => temp.ToStudentResponse()).ToList();

@@ -6,7 +6,7 @@ namespace ApiFirstProj.Services
     {
         Task<StudentResponse> AddStudentAsync(StudentAddRequest student);
         Task<StudentResponse> GetStudentViaIdAsync(Guid id);
-        Task<ICollection<StudentResponse>> GetAllStudents();
+        Task<ICollection<StudentResponse>> GetAllStudents(CancellationToken cancellationToken);
         Task<StudentResponse> UpdateStudentViaIdAsync(Guid id, StudentUpdateRequest request);
         Task<bool> DeleteStudentViaIdAsync(Guid id);
     }
