@@ -29,9 +29,9 @@ namespace ApiFirstProj.Controllers.v2
             return Ok(response);
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StudentResponse>>> GetStudents()
+        public async Task<ActionResult<IEnumerable<StudentResponse>>> GetStudents(CancellationToken cancellationToken)
         {
-            var response = await _studentServices.GetAllStudents();
+            var response = await _studentServices.GetAllStudents(cancellationToken);
 
             if (response == null) { NotFound(); }
 

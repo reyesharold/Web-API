@@ -50,9 +50,9 @@ namespace ApiFirstProj.Controllers.v1
             return Ok(result);
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StudentResponse>>> GetStudents()
+        public async Task<ActionResult<IEnumerable<StudentResponse>>> GetStudents(CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetStudentsQuery());
+            var result = await _mediator.Send(new GetStudentsQuery(), cancellationToken);
 
             return Ok(result);
         }
